@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>404 Not Found</title>
+  <title>Page not found</title>
+  <script type="text/javascript">
+    window.isErrorPage = true;
+    window.errorCode = '404';
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Page not found">
+  <script src="/scripts/scripts.js" type="module" crossorigin="use-credentials"></script>
+  <script type="module">
+    import { sampleRUM } from '/scripts/aem.js';
+
+    window.addEventListener('load', () => {
+      if (document.referrer) {
+        const { origin, pathname } = new URL(document.referrer);
+        if (origin === window.location.origin) {
+          const backBtn = document.createElement('a');
+          backBtn.classList.add('button', 'error-button-back');
+          backBtn.href = pathname;
+          backBtn.textContent = 'Go back';
+          backBtn.title = 'Go back';
+          const btnContainer = document.querySelector('.button-container');
+          btnContainer.append(backBtn);
+        }
+      }
+      sampleRUM('404', { source: document.referrer, target: window.location.href });
+    });
+  </script>
+  <link rel="stylesheet" href="/styles/styles.css">
   <style>
-    body {
-      background-color: #f2f2f2;
-      font-family: Arial, sans-serif;
-      text-align: center;
+    main.error {
+      min-height: calc(100vh - var(--nav-height));
+      display: flex;
+      align-items: center;
     }
-    .error-container {
-      margin: 100px auto;
-      max-width: 600px;
-      padding: 50px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+
+    main.error .error-number {
+      width: 100%;
     }
-    h1 {
-      font-size: 60px;
-      margin-bottom: 30px;
-    }
-    p {
-      font-size: 20px;
-      margin-bottom: 30px;
-    }
-    .search-form {
-      display: inline-block;
-      margin-top: 30px;
-    }
-    .search-input {
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      width: 300px;
-    }
-    .search-button {
-      padding: 10px 20px;
-      border-radius: 5px;
-      border: none;
-      background-color: #007bff;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .search-button:hover {
-      background-color: #0062cc;
+
+    main.error .error-number text {
+      font-family: var(--fixed-font-family);
     }
   </style>
+  <link rel="stylesheet" href="/styles/lazy-styles.css">
 </head>
+
 <body>
-  <div class="error-container">
-    <h1>404 Not Found</h1>
-    <p>Sorry, the page you are looking for could not be found.</p>
-    <form class="search-form" action="/" method="get">
-      <input class="search-input" type="text" name="search" placeholder="Search website...">
-      <button class="search-button" type="submit">Search</button>
-    </form>
-  </div>
+  <header></header>
+  <main class="error">
+    <div class="section">
+      <svg viewBox="1 0 38 18" class="error-number">
+        <text x="0" y="17">404</text>
+      </svg>
+      <h2 class="error-message">Page Not Found</h2>
+      <p class="button-container">
+        <a href="/" class="button secondary error-button-home">Go home</a>
+      </p>
+    </div>
+  </main>
+  <footer></footer>
 </body>
+
 </html>
