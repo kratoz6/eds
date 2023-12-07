@@ -8,14 +8,14 @@
  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
- /* new page */
+ /* new page *//
 
  :root {
   /* colors */
   --link-color: #f6f85d;
   --link-hover-color: #136ff6;
   --background-color: #a3d1cf;
-  --overlay-background-color: #d5c8f3;
+  --overlay-background-color: #24056b;
   --highlight-background-color: #a09bec;
   --text-color: #000000;
 
